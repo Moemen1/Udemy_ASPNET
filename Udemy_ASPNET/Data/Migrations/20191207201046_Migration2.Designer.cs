@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Udemy_ASPNET.Data;
 
 namespace Udemy_ASPNET.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191207201046_Migration2")]
+    partial class Migration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,34 +192,11 @@ namespace Udemy_ASPNET.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("IsSubscribedToNewsletter");
-
-                    b.Property<byte>("MembershipTypeId");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255);
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MembershipTypeId");
 
                     b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("Udemy_ASPNET.Models.MembershipType", b =>
-                {
-                    b.Property<byte>("Id");
-
-                    b.Property<byte>("DiscountRate");
-
-                    b.Property<byte>("DurationInMonths");
-
-                    b.Property<short>("SignUpFee");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MembershipType");
                 });
 
             modelBuilder.Entity("Udemy_ASPNET.Models.Movie", b =>
@@ -275,14 +254,6 @@ namespace Udemy_ASPNET.Data.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Udemy_ASPNET.Models.Customer", b =>
-                {
-                    b.HasOne("Udemy_ASPNET.Models.MembershipType", "MembershipType")
-                        .WithMany()
-                        .HasForeignKey("MembershipTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

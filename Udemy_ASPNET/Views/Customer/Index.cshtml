@@ -1,0 +1,25 @@
+﻿@model List<Customer>
+
+@{
+}
+
+<h2>Customer</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Customer</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            @foreach (Customer customer in Model)
+             {
+            
+            <td>@customer.Name</td>
+          
+             }
+        </tr>
+    </tbody>
+</table>
